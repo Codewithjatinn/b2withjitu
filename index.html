@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jatin's TELC B2 Cheat-Code Dashboard</title>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 10px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--card-bg);
+        }
+
+        header h1 {
+            color: var(--accent-blue);
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Set Navigation */
+        .nav-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 25px;
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-dark);
+            padding: 10px 0;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid #334155;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--accent-blue);
+            background-color: #1e293b90;
+        }
+
+        .nav-btn.active {
+            background-color: var(--accent-blue);
+            color: var(--bg-dark);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Content Container */
+        .set-content {
+            display: none;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .set-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            background: linear-gradient(90deg, #1e293b, #0f172a);
+            padding: 12px;
+            border-left: 4px solid var(--accent-blue);
+            margin: 25px 0 15px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.3rem;
+        }
+
+        .section-title.teil2 {
+            border-left-color: var(--accent-green);
+        }
+
+        /* Accordion Cards */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid #334155;
+        }
+
+        .card-header {
+            background-color: #24344d;
+            padding: 14px 18px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1rem;
+            user-select: none;
+        }
+
+        .card-header::after {
+            content: '▼';
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            transition: transform 0.3s;
+        }
+
+        .card.open .card-header::after {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background-color: var(--card-bg);
+        }
+
+        /* Dynamic height handled cleanly via JS now */
+        .card.open .card-body {
+            transition: max-height 0.5s ease-in;
+        }
+
+        .card-inner-content {
+            padding: 18px;
+            border-top: 1px solid #334155;
+        }
+
+        /* Highlights & Blocks */
+        .story-block {
+            background-color: #0f172a80;
+            border-left: 3px solid #e2e8f0;
+            padding: 12px;
+            margin: 12px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .story-block em {
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        .trigger-list {
+            margin: 10px 0;
+            padding-left: 20px;
+            color: #38bdf8;
+        }
+
+        .trigger-list span {
+            color: var(--text-main);
+        }
+
+        .answer-badge {
+            display: inline-block;
+            background-color: rgba(74, 222, 128, 0.15);
+            color: var(--accent-green);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            margin-top: 8px;
+            border: 1px solid rgba(74, 222, 128, 0.3);
+        }
+
+        .cram-sheet {
+            background: linear-gradient(135deg, #1e1b4b, #311042);
+            border: 1px dashed #a855f7;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .cram-sheet h4 {
+            color: #c084fc;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .one-line-story {
+            background-color: #701a7530;
+            border: 1px solid #f472b640;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            color: #f472b6;
+            font-weight: 500;
+        }
+
+        /* Tables style */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #334155;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e293b;
+            color: var(--accent-blue);
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.5rem; }
+            .nav-btn { padding: 8px 12px; font-size: 0.8rem; }
+            .card-header { font-size: 0.9rem; padding: 12px; }
+            .card-inner-content { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Jatin's TELC B2 Super-Cram Dashboard</h1>
+        <p>Tap a set below to instantly load movie visuals, trigger words, and exam tricks without any load.</p>
+    </header>
+
+    <div class="nav-container">
+        <button class="nav-btn active" onclick="switchSet('set6', this)">6th Set</button>
+        <button class="nav-btn" onclick="switchSet('set7', this)">7th Set</button>
+        <button class="nav-btn" onclick="switchSet('set8', this)">8th Set</button>
+        <button class="nav-btn" onclick="switchSet('set9', this)">9th Set</button>
+        <button class="nav-btn" onclick="switchSet('set10', this)">10th Set</button>
+        <button class="nav-btn" onclick="switchSet('set11', this)">11th Set</button>
+        <button class="nav-btn" onclick="switchSet('set12', this)">12th Set</button>
+        <button class="nav-btn" onclick="switchSet('set13', this)">13th Set</button>
+        <button class="nav-btn" onclick="switchSet('set14', this)">14th Set</button>
+        <button class="nav-btn" onclick="switchSet('set15', this)">15th Set</button>
+        <button class="nav-btn" onclick="switchSet('set16', this)">16th Set</button>
+        <button class="nav-btn" onclick="switchSet('set17', this)">17th Set</button>
+    </div>
+
+    <div id="set6" class="set-content active">
+        <div class="section-title">📖 LESEN TEIL 1 (Memory Story Method)</div>
+        
+        <div class="card">
+            <div class="card-header">Text 1: Süßwaren mit langer Tradition</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block"><strong>🧠 Story:</strong> “Ek bahut purani candy factory hai. Wahan museum bana hua hai. Tum dekhte ho ki pehle log kaise bonbon banate the, purani machines aur history sab dikhayi jaati hai.”</div>
+                    <div class="trigger-list">⚡ Trigger Words: <span>Museum → alte Fabrik → Geschichte → Tradition</span></div>
+                    <div class="answer-badge">➡️ Answer = h</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Text 2: Naschen statt wegwerfen</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block"><strong>🧠 Story:</strong> “Frankfurt station par ek vending machine lagi hai jisme expiry ke paas wali chocolates aur chips saste milte hain. Throw nahi karte, log kha lete hain aur food waste kam hota hai.”</div>
+                    <div class="trigger-list">⚡ Trigger Words: <span>Bahnhof → Automat → abgelaufen → Lebensmittelverschwendung</span></div>
+                    <div class="answer-badge">➡️ Answer = e</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Text 3: Wasser, Wärme, Wellness – antike Badefreuden</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block"><strong>🧠 Story:</strong> “Ancient Rome me bade-bade luxurious bath hote the. Log nahate bhi the, relax bhi karte the aur doston se milte bhi the.”</div>
+                    <div class="trigger-list">⚡ Trigger Words: <span>Römische Thermen → Entspannung → Luxus → antik</span></div>
+                    <div class="answer-badge">➡️ Answer = i</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Text 4: Irrtum: Süßes macht doch nicht glücklich</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block"><strong>🧠 Story:</strong> “Hollywood me log chocolate khake mood theek karte hain. Lekin research bolti hai sugar mood improve nahi karti, ulta aur thaka deti hai.”</div>
+                    <div class="trigger-list">⚡ Trigger Words: <span>Studie → Zucker → schlechte Laune → nicht glücklich</span></div>
+                    <div class="answer-badge">➡️ Answer = c</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">Text 5: In der Stadt der warmen Quelle</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block"><strong>🧠 Story:</strong> “Hungary especially Budapest me bahut saare thermal baths hain. Garam pani, minerals aur wellness ke liye famous city.”</div>
+                    <div class="trigger-list">⚡ Trigger Words: <span>Ungarn → Budapest → Thermalquellen → Kurort</span></div>
+                    <div class="answer-badge">➡️ Answer = b</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cram-sheet">
+            <h4>🔥 30-Second Revision</h4>
+            Museum → Tradition (h)<br>
+            Bahnhof → Food Waste (e)<br>
+            Rome → Ancient Bath (i)<br>
+            Sugar Study → Not Happy (c)<br>
+            Budapest → Hot Springs (b)
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (ORAL STORY METHOD)</div>
+        <div class="card">
+            <div class="card-header">Full Movie Story & MCQ Triggers</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho ek teacher hai Brigitte Vollmer. Woh Frankfurt me 33 saal se Greek, Latin aur Philosophy padhati hai. Students uski teaching itni pasand karte hain ki retirement se kuch mahine pehle usko German Teacher Award mil jata hai. Uske parents pehle darte the ki ancient languages padhkar paise nahi kama payegi aur kehte the ki kisi ameer aadmi se shaadi kar lena. Lekin Brigitte ne sab galat prove kar diya. Baad me wahi family ki main earner bani. Teacher banne se pehle usko sirf ek dar tha ki kahin woh boring teacher na ban jaye aur students uske lectures me interest na lein. Lekin jab usne padhana shuru kiya to bachche usse bahut inspire hue. Exam ke time uske students ko Teacher Award ke baare me pata chala. Unhone socha ‘Madam hi deserve karti hain.’ Sab ne milkar ek video banaya, competition me bheja aur unki nomination successful ho gayi. Ab retirement aa rahi hai. Lekin Brigitte ghar baithna nahi chahti. Woh future me bhi padhana chahti hai aur apne ex-students ke saath Greece trip plan karne ke liye excited hai.”</div>
+                    
+                    <p><strong>Q6:</strong> Retirement ke just pehle award mila. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q7:</strong> Parents ko laga tha paise nahi kama payegi. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>Q8:</strong> Usko dar tha students interest nahi lenge. (Memory: boring teacher ban jaungi.) <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q9:</strong> Students uski mehnat aur exam preparation ke liye thank you bolna chahte the aur video banaya. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>Q10:</strong> Retirement ke baad ex-students ke saath Greece trip ka plan. <span class="answer-badge">✅ B</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cram-sheet">
+            <h4>⚡ 15-Second Cram Sheet</h4>
+            <strong>Teil 1:</strong> Museum=h | Food Waste Machine=e | Roman Bath=i | Sugar Myth=c | Budapest=b<br><br>
+            <strong>Teil 2:</strong> Award before retirement = A | Parents worried about money = C | Fear about students = A | Students thanked her = C | Greece trip with former students = B
+        </div>
+    </div>
+
+    <div id="set7" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1 (Story Method)</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Ohne Kaffee geht hier nichts</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho tum Sachsen gaye ho. Wahan subah se shaam tak har jagah coffee hi coffee hai. Coffee ke bina party nahi, ghar nahi, café nahi. Log cake ko bhi coffee me dip karke khate hain.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>Sachsen, Coffee everywhere, Gedibbscht, Coffee culture</span></div>
+                    <div class="answer-badge">➡️ Answer = j</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Attraktive Kleinstadt – touristischer Geheimtipp</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Ek chhota sa hidden city hai Eppingen. Bahut sundar houses, museum, church concerts, beer aur hiking sab kuch hai lekin tourists bahut kam aate hain.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>kleine Stadt, Museum, Wandern, Touristen</span></div>
+                    <div class="answer-badge">➡️ Answer = b</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Klösterliche Strenge für berühmte Schüler</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Ek purana monastery school hai. Johannes Kepler yahan padha. Hermann Hesse bhi padha lekin bahut strict rules ki wajah se pareshan hua.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>Kloster, Internat, Kepler, Hesse, strenge Disziplin</span></div>
+                    <div class="answer-badge">➡️ Answer = h</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Altes Handwerk und alte Technik anschaulich präsentiert</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Ek old monastery ke andar museum bana hua hai. Fire trucks, wine museum aur log aaj bhi haath se instruments, glass aur jewellery banate hue dikhte hain.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>Museum, Handarbeit, Feuerwehr, Glas, Gold</span></div>
+                    <div class="answer-badge">➡️ Answer = a</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Entdeckung und Verbreitung des Kaffees</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Ek bakri ne coffee discover karwa di. Goats ne berries khayi aur hyper ho gayi. Logon ne experiment kiya aur coffee poori duniya me famous ho gayi.” 😂 Ye story kabhi nahi bhoologe.</div>
+                    <div class="trigger-list">⚡ Triggers: <span>Ziegen, Beeren, Entdeckung, Äthiopien, Europa</span></div>
+                    <div class="answer-badge">➡️ Answer = f</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (ORAL STORY)</div>
+        <div class="card">
+            <div class="card-header">Full Movie Story & MCQ Memory</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho ek psychologist Susanne Hill parents ko advice de rahi hai. Parents chahte hain ki bachche chhoti age se bahut languages seekhen. Susanne bolti hai ki multilingual children generally zyada communicative hote hain aur naye ideas jaldi samajhte hain. Lekin sirf English ya French sikhana enough nahi hai. Bachche ka us language ke saath emotional connection hona chahiye. Agar mummy-papa khud us language me comfortable hi nahi hain to force nahi karna chahiye. Dusri language baby se hi shuru karna zaroori nahi. Kindergarten se bhi start kart sakte ho aur tab bhi achha result milta hai. Ek aur important rule hai—ek person ek hi language bole. Agar mummy kabhi German kabhi English bolti rahegi to bachcha confuse ho sakta hai. Parents ko grammar class jaisa nahi padhana chahiye. Bas daily life me naturally language use karo. Aur sabse important baat… Agar bachcha doosri language sirf har kuch din baad bhi sunta hai tab bhi uski development ko koi nuksan nahi hota.”</div>
+                    <p><strong>Q6:</strong> Multilingual kids are more communicative. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q7:</strong> Success tab hoti hai jab emotional connection ho. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q8:</strong> Kindergarten se bhi start kar sakte hain. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>Q9:</strong> Ek person ek language. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q10:</strong> Har kuch din contact ho tab bhi koi problem nahi. <span class="answer-badge">✅ C</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cram-sheet">
+            <h4>⚡ 20 Second Cram Sheet</h4>
+            <strong>Teil 1:</strong> Coffee addicts → j | Hidden town → b | Strict monastery school → h | Old handicraft museum → a | Goats discovered coffee → f<br><br>
+            <strong>Teil 2:</strong> Communicative kids → A | Emotional connection → A | Kindergarten enough → C | One person one language → A | Few days contact is okay → C
+        </div>
+    </div>
+
+    <div id="set8" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Uni-Campus: rauchfreie Zone eingerichtet</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho Cologne University me students aur teachers smoke se pareshan ho gaye. Pehle sirf classrooms me ban tha, ab poore campus aur toilets tak smoking ban ho gayi. Smokers ko bahar thand me jana padega.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🏫 Universität, 🚭 Rauchverbot, Campus, Nichtraucher</span></div>
+                    <div class="answer-badge">➡️ Answer = h</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Höhenluft – gut fürs Herz</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho doctor bolta hai vacation ke liye mountains jao. 2000 meter ki fresh air blood pressure kam karti hai aur heart aur lungs strong banati hai.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🏔️ 2000 Meter, ❤️ Herz, Gesundheit, Akklimatisierung</span></div>
+                    <div class="answer-badge">➡️ Answer = d</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Mädchen geben mehr Geld für Zigaretten aus als Jungen</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Teenage girls cool dikhne ke liye smoking shuru karti hain. Friends bhi smoke karte hain aur girls me smokers ka percentage zyada hai.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🚬 Mädchen, Teenager, Cliquendruck, Rauchen</span></div>
+                    <div class="answer-badge">➡️ Answer = b</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Freizeitsport in den Alpen</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Family summer vacation pe Alps jaati hai. Ski hi nahi, hiking, climbing, swimming sab hota. Bas nature enjoy karo.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🏔️ Alpen, Wandern, Klettern, Freizeit</span></div>
+                    <div class="answer-badge">➡️ Answer = a</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Junge Sportler: weniger suchtanfällig</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Jo bachche sports club join karte hain unke dost bante hain. Woh cigarettes, alcohol aur drugs se door rehte hain.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>⚽ Sportverein, Freunde, Weniger Rauchen, Keine Drogen</span></div>
+                    <div class="answer-badge">➡️ Answer = e</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (ORAL STORY)</div>
+        <div class="card">
+            <div class="card-header">Full Movie Story & MCQ Trigger</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho ek family apne 16 saal ke bete ko credit card dena chahti hai. Bank bolta hai tension mat lo, normal credit card nahi Prepaid Card lo. Pehle paise card me load karo. Jitna balance hai utna hi kharch hoga. Debt kabhi nahi banega. Parents ghar baithe card recharge kar sakte hain aur kharcha control kar sakte hain. Ye card especially teenagers aur un logon ke liye best hai jinki regular income nahi hoti. Agar card chori bhi ho jaye to sirf loaded balance hi lose hoga. Experts bolte hain card lene se pehle fees compare karna. Hidden charges dekhna. Research me pata chala prepaid cards almost normal credit cards jitne hi useful hain aur fees bhi lagbhag same hai. Adults yaerly fee dete hain (29–39 Euro), teenagers ke liye fee kam hai aur kai banks me 18 ya 21 saal tak free hota hai.”</div>
+                    <p><strong>Q6:</strong> Bank aur Sparkasse dono youth ko prepaid card dete hain. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q7:</strong> Jitna balance utna hi kharcha. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>Q8:</strong> Regular income na ho tab bhi useful. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>Q9:</strong> Fees almost same as normal credit card. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q10:</strong> Adults (21+ ke baad) yearly fee zyada dete hain. <span class="answer-badge">✅ A</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="one-line-story">
+            <strong>🔥 Super Memory Trick (1 Line):</strong><br>
+            “University ne smoking ban ki → Mountain ne heart bachaya → Girls ne smoke kiya → Alps me sports hue → Sports club ne addiction hata diya. Phir ek prepaid card aaya jisme jitna load utna kharch, youth ke liye best aur adults zyada fee dete hain.”
+        </div>
+    </div>
+
+    <div id="set9" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Steigende Spritpreise: die Tricks der Autofahrer</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho petrol bahut mehenga ho gaya. Kuch log petrol bharwa ke bina paise diye bhaag jaate hain aur bolte hain ‘Oops! Pay karna bhool gaya.’ Lekin har petrol pump pe camera hota hai aur police sab pakad leti hai.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>Anleger ⛽ Tankstelle, 📹 Kamera, 🚔 Polizei, 💰 Benzinpreise</span></div>
+                    <div class="answer-badge">➡️ Answer = i</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Die wichtigsten Erste-Hilfe-Ratschläge</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Road accident ho gaya. Sabse pehle warning triangle lagao, ambulance ko call karo, injured ko first aid do aur photos le lo.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🚑 Unfall, 🆘 Erste Hilfe, 112, Warndreieck</span></div>
+                    <div class="answer-badge">➡️ Answer = b</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Einmal die Welt als Ganzes sehen</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Ek female pilot bachpan se plane udaana chahti thi. Ab uska sapna hai space me jaakar poori Earth ko gol dekhna.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>✈️ Pilotin, 🌍 Erde als Kugel, 🚀 Weltraum</span></div>
+                    <div class="answer-badge">➡️ Answer = c</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Einmal um die Welt ohne einen Tropfen Benzin</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Ek Swiss aadmi solar car me poori duniya ghoom raha hai. Petrol ki ek boond bhi use nahi hui.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>☀️ Solarauto, 🌍 Weltreise, 🚗 Kein Benzin</span></div>
+                    <div class="answer-badge">➡️ Answer = d</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Fliegen statt fahren</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Government ke ministers train ki jagah plane se travel karte hain, chahe Germany ke andar hi jaana ho.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>✈️ Flugzeug, Bundesregierung, Inlandsreisen</span></div>
+                    <div class="answer-badge">➡️ Answer = e</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (ORAL STORY)</div>
+        <div class="card">
+            <div class="card-header">Full Movie Story (Horse-Ball Game)</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">“Socho France se ek naya game Germany aaya hai—Horse-Ball, yani ghodon par basketball. Wiesbaden ka club Germany ka sabse strong club hai. Uski team hi practically German National Team hai. Game me baskets normal basketball ki tarah nahi hote. Woh side ki taraf khule hote hain aur ball ko ghode par baithkar score karna hota hai. Beginners course me apna horse lana zaroori nahi. Club horse bhi mil sakta hai, lekin agar chaaho to apna horse la sakte ho. Ball ko haath se uthaya ja sakta hai. Isliye usme straps lage hote hain taaki rider ek haath se pakad sake. Safety ke liye horses aur riders dono special protection pehente hain. Aur is game me whip (Gerte) use karna mana hai. End me owner bolta hai ki horses ko bhi ye game enjoy aata hai. Kabhi-kabhi riders hi zyada thak jaate hain.”</div>
+                    <p><strong>Q6:</strong> Wiesbaden team hi National Team hai. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q7:</strong> Basket side ki taraf open hai. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>Q8:</strong> Apna horse la sakte ho, compulsory nahi. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>Q9:</strong> Ball haath me liya ja sakta hai. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>Q10:</strong> Training itni hard hai ki riders horses se zyada stress me lagte hain. <span class="answer-badge">✅ A</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="one-line-story">
+            <strong>🔥 One-Line Memory Story:</strong><br>
+            “Petrol mehenga hua to log bina paise bhaage, phir accident hua aur first aid di. Ek female pilot ne space se Earth dekhne ka sapna dekha. Udhar ek aadmi solar car se duniya ghoom raha tha aur ministers plane me travel kar rahe the. Phir Horse-Ball me National Team ne side basket me ball haath se daali, apna horse optional tha aur riders horses se zyada thak gaye.”
+        </div>
+    </div>
+
+    <div id="set10" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1 (Official solutions loaded)</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Answer = f) Frische Luft macht stark</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Ek company oxygen water bech rahi hai aur bol rahi hai: “Ye piyo, young aur fit ban jaoge.” Scientists bolte hain: “Pagal ho kya? Oxygen paani se nahi, fresh air se milti hai.”</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🌬 Fresh Air, ❌ Oxygen Water fake</span></div>
+                    <div class="answer-badge">➡️ Answer = f</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Answer = j) Vom Regen zum Mineralwasser</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Rain girta hai ☔ → Zameen me filter hota hai → Hazaron saal niche rehta hai → Mineral Water ban jata hai.</div>
+                    <div class="trigger-list">⚡ Triggers: <span>☔ Regen, ⬇ Ground, 💧 Mineralwasser</span></div>
+                    <div class="answer-badge">➡️ Answer = j</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Answer = c) Sommer bedeutet in Zukunft nicht unbedingt Sonne</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Future me summer matlab sunshine nahi. Kabhi flood, kabhi thunder, kabhi hailstorm. Climate change.</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🌧 Flood, ⛈ Storm, ☀ Summer no sunshine</span></div>
+                    <div class="answer-badge">➡️ Answer = c</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Answer = h) Sprudel hausgemacht</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Roz bottle uthane ki zarurat nahi. Ghar pe Soda Machine lagao. Apni Sprite bana lo.</div>
+                    <div class="trigger-list">⚡ Triggers: <span>🏠 Home, 🥤 Soda Machine, 🚫 No bottle carrying</span></div>
+                    <div class="answer-badge">➡️ Answer = h</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Answer = e) Viel Wasser trinken – Gesundheit tanken</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Pehle log Coke peete the. Ab Doctors bolte hain: Roz 2.5 litre paani piyo. Healthy raho.</div>
+                    <div class="trigger-list">⚡ Triggers: <span>💧 Drink Water, 👨‍⚕ Doctor, Health</span></div>
+                    <div class="answer-badge">➡️ Answer = e</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (Movie: Krista Cow)</div>
+        <div class="card">
+            <div class="card-header">Full Movie Story & Questions</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Ek khoobsurat Holstein cow hai— 🐄 Krista. Filmmakers documentary banane aaye the. Lekin Krista itni famous ho gayi ki poori movie us par hi ban gayi. Krista already bahut awards jeet chuki hai. Shooting ke time usko operation karna pada. Baad me uska bachcha bhi hua. Movie me dikhaya gaya ki milk business mushkil ho gaya hai kyunki log supermarket me sabse sasta doodh kharidte hain. Film critics ko movie pasand aayi. Lekin cinema owners bolte hain— “Ek gaay ki movie kaun dekhega?”</div>
+                    <p><strong>Q6:</strong> Holstein cows dairy industry dominate karti hain. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q7:</strong> Krista ne pehle hi kaafi prizes jeete. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>Q8:</strong> Shooting ke dauran operation hua. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>Q9:</strong> Milk business ki problem consumers ki wajah se hai. Log cheapest milk kharidte hain. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>Q10:</strong> Cinema owners abhi tak convince nahi hue. “Gaay ki movie kaun dekhega?” <span class="answer-badge">✅ A</span></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="one-line-story">
+            <strong>🧠 One-Line Memory Story:</strong><br>
+            “Ek company oxygen water bech rahi thi, scientist ne bola fresh air hi best hai. Baarish ka paani zameen me jaake mineral water ban gaya. Future me summer me dhoop ki jagah storms aaye. Ghar me soda machine se sprudel banne laga aur doctors ne roz paani peene ko bola. Phir famous cow Krista ki movie bani—Holstein dairy ki queen thi, operation hua, consumers ke cheap milk kharidne se farmers ko problem hui aur cinema owners bole ‘Gaay ki movie kaun dekhega?’”
+        </div>
+    </div>
+
+    <div id="set11" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Answer = c) Neue Besitzer für nicht mehr gebrauchte Gegenstände</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Story: Ek Tauschring (exchange club) hai. Jo cheez tum nahi use karte (books, kapde, kitchen items), woh kisi aur ko de do. 👉 New owner mil gaya.</div>
+                    <div class="answer-badge">➡️ Answer = c</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Answer = i) Volle Einkaufstüten machen nur kurze Zeit Freude</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Story: Shopping ki. Bags full. Mood happy 😍 Do ghante baad… Bank account empty 😭 Stress. Happiness khatam.</div>
+                    <div class="answer-badge">➡️ Answer = i</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Answer = f) Rücksendungen verringern – Händler hoffen auf Lösungen</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Story: Online shopping. Size galat. Return. Companies bolti hain: “Future me AI aur better size guide se returns kam karenge.”</div>
+                    <div class="answer-badge">➡️ Answer = f</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Answer = a) Gemeinsam kaputte Geräte retten</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Story: Repair Café. Sab log milkar TV, Cycle, Mixer repair karte hain. Together repair.</div>
+                    <div class="answer-badge">➡️ Answer = a</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Answer = j) Wer Engagement zeigt, steigert sein Glücksgefühl</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Story: Dusron ki help karo. Donation karo. Volunteer bano. Science bolti hai— Helping = Happy.</div>
+                    <div class="answer-badge">➡️ Answer = j</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (Mannequins Repair Movie)</div>
+        <div class="card">
+            <div class="card-header">Story Method & MCQ Split</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Ek French tailor ne sabse pehli mannequin invent ki. Baad me Austria ka Andre Bauernfeind mannequins repair karta hai. Normal nail polish use nahi kar sakta. Apni pehli mannequin installment (EMI) par kharidi thi. Aaj doosri companies ki mannequins bhi bechta hai. Aur environment-friendly paint banata hai.</div>
+                    <p><strong>6️⃣ Answer = C:</strong> French tailor invented first mannequin. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>7️⃣ Answer = A:</strong> Normal nail polish mana hai. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>8️⃣ Answer = B:</strong> Pehli mannequin EMI pe li. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>9️⃣ Answer = B:</strong> Dusri companies ki mannequins bhi sell karta hai. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>🔟 Answer = A:</strong> Eco-friendly colours. <span class="answer-badge">✅ A</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="set12" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Answer = H) Ein Leistungssport für jedes Alter</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Text Marathon ke baare me hai. Last line: Marathon budhape tak kiya ja sakta hai. ➡️ Har age ke liye.</p>
+                    <div class="answer-badge">✅ H</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Answer = F) Sportbegeisterte Eltern – und auch die Babys sind beim Joggen dabei</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Story: Parents jogging kar rahe hain. Baby stroller me saath hai. Pure article jogging stroller par hai.</div>
+                    <div class="answer-badge">✅ F</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Answer = C) Fitness auch mit wenig Zeitaufwand erreichbar</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Scientists bolte hain: Sirf 6 min/week ya 1 minute/day training bhi kaafi hai. Less time → same fitness.</p>
+                    <div class="answer-badge">✅ C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Answer = A) Sport ist gesund – wenn man einige wichtige Regeln beachtet</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Article bolta hai: Running achha hai BUT Pulse control karo, 20–30 min. Rules follow karo. Sport + Rules</p>
+                    <div class="answer-badge">✅ A</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Answer = D) Geprüfte Qualität für Babys</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Pure article baby stroller kharidne ke rules aur TÜV certification par hai. Quality checked.</p>
+                    <div class="answer-badge">✅ D</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (Helmut Carnival Parade)</div>
+        <div class="card">
+            <div class="card-header">Movie Story & MCQ Breakdown</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Ek uncle Helmut Scherer hain. Unna city me one-man carnival parade nikalte hain. Apne handcart par society ka mazaak banate hain. Pehle log samajhte nahi the. Aaj woh city ki advertisement ban gaye. Aur Germany ke doosre cities ke carnival me bhi participate karte hain.</div>
+                    <p><strong>6️⃣ Answer = A:</strong> Helmut Unna me chhota carnival parade chalata hai. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>7️⃣ Answer = C:</strong> Handcart par social issues ko funny tareeke se dikhata hai. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>8️⃣ Answer = A:</strong> Starting me log usse support nahi karte the. Understanding nahi thi. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>9️⃣ Answer = B:</strong> Aaj city bolti hai— Ye hamari best advertisement hai. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>🔟 Answer = A:</strong> Usne Germany ke doosre carnival cities me bhi participate kiya. <span class="answer-badge">✅ A</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="set13" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Answer = I) Was tun, wenn es Nacht wird? Lichtquellen vergangener Zeiten.</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Text mein bataya gaya hai ki electricity se pehle log raat mein kaise roshni karte the (Feuer, Kerzen, Petroleum) aur museum bhi purane zamane ki lighting dikhata hai.</p>
+                    <div class="answer-badge">✅ I</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Answer = E) Stadtbewohner entdecken das Landleben.</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Article batata hai ki log cities chhodkar villages/Umgebung mein shift ho rahe hain kyunki shanti, kam kharcha aur home office possible hai.</p>
+                    <div class="answer-badge">✅ E</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Answer = B) Die Auswirkungen künstlichen Lichts.</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Artificial light ke nuksan: insects marte hain, birds direction kho dete hain, humans ki sleep disturb hoti hai.</p>
+                    <div class="answer-badge">✅ B</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Answer = A) Der Wald als neues Zuhause.</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Ek couple permanently forest mein rehne lagta hai aur self-sufficient life jeeta hai.</p>
+                    <div class="answer-badge">✅ A</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Answer = F) Stadtbewohner leben umweltfreundlicher.</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Research ke hisaab se city mein rehne wale log public transport aur kam driving ki wajah se zyada environmentally friendly hote hain.</p>
+                    <div class="answer-badge">✅ F</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (Andre Mannequin Part 2)</div>
+        <div class="card">
+            <div class="card-header">Full Story & Triggers</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Ye article Schaufensterpuppen (mannequins) aur unke maker Andre Bauernfeind ke baare mein hai.</div>
+                    <p><strong>6️⃣ Answer = C:</strong> Pehli Schaufensterpuppe French tailor Alexis Lavigne ne invent ki thi. <span class="answer-badge">✅ C</span></p><br>
+                    <p><strong>7️⃣ Answer = A:</strong> Normal nail polish use nahi kar sakta kyunki oil paint ko dissolve kar deta hai. <span class="answer-badge">✅ A</span></p><br>
+                    <p><strong>8️⃣ Answer = B:</strong> Usne apni pehli mannequin installments (Ratenzahlungen) par kharidi thi. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>9️⃣ Answer = B:</strong> Aaj woh dusre manufacturers ki mannequins bhi bechta (represents/sells) hai. <span class="answer-badge">✅ B</span></p><br>
+                    <p><strong>🔟 Answer = A:</strong> Usne environment-friendly, harmless paint develop ki hai jo mannequins par use hoti hai. <span class="answer-badge">✅ A</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="set14" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Answer = B) Das Ende der Dunkelheit</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Book “Die Nacht” ke baare mein hai. Artificial light ki wajah se aaj kal asli andhera khatam ho gaya hai.</p>
+                    <div class="answer-badge">➡️ B</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Answer = I) Gelungene Einführung in die moderne Fotografie</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Ye beginners ke liye photography guide/book hai jo step-by-step photography sikhati hai.</p>
+                    <div class="answer-badge">➡️ I</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Answer = A) Bilder einer bedeutenden Künstlerin</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Annie Leibovitz ki exhibition hai jisme uski famous aur personal photos dikhayi gayi hain.</p>
+                    <div class="answer-badge">➡️ A</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Answer = G) Erde, Mond und Sterne – wie man sie noch nie gesehen hat</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>TWAN technique se Earth, Moon aur Stars ki amazing photographs dikhayi gayi hain.</p>
+                    <div class="answer-badge">➡️ G</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Answer = C) Die bemerkenswerte Karriere eines Fotografen</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Andreas Feininger ki life story aur successful photography career.</p>
+                    <div class="answer-badge">➡️ C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (Healthy Food for Kids)</div>
+        <div class="card">
+            <div class="card-header">Story Trick & Answers</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">Article: Gesundes Essen für Schulkinder (Healthy food for school children)</div>
+                    <p><strong>6️⃣ Answer = B:</strong> Kuch parents time ki kami (Zeitmangel) ki wajah se breakfast skip kar dete hain. <span class="answer-badge">➡️ B</span></p><br>
+                    <p><strong>7️⃣ Answer = A:</strong> Healthy breakfast se school jaate waqt bhi child zyada alert aur safe rehta hai. <span class="answer-badge">➡️ A</span></p><br>
+                    <p><strong>8️⃣ Answer = C:</strong> Milk alag-alag flavours mein milti hai: Erdbeere, Kakao, Vanille. <span class="answer-badge">➡️ C</span></p><br>
+                    <p><strong>9️⃣ Answer = A:</strong> Children ko khud yaad nahi rehta ki paani peena hai, isliye unhe remind karna chahiye. <span class="answer-badge">➡️ A</span></p><br>
+                    <p><strong>🔟 Answer = A:</strong> Article ke end mein likha hai ki school mein proper lunch provide hona chahiye. <span class="answer-badge">➡️ A</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="set15" class="set-content">
+        <div class="section-title">📖 LESEN TEIL 1</div>
+        
+        <div class="card">
+            <div class="card-header">1️⃣ Text 1 → J) Wenn aus Erdbeeren Tomaten werden</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Children ko fruits aur vegetables pehchaan hi nahi aate. Strawberry = Tomato samajh liya.</p>
+                    <div class="answer-badge">➡️ J</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">2️⃣ Text 2 → H) Von der Diät zur Krankheit</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Diet se shuru hua… baad mein eating disorder ban gaya.</p>
+                    <div class="answer-badge">➡️ H</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">3️⃣ Text 3 → B) Jugend engagiert sich für den Umweltschutz</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Jugend forscht competition mein students environment ke projects bana rahe hain.</p>
+                    <div class="answer-badge">➡️ B</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">4️⃣ Text 4 → A) Jugend forscht – auch auf dem Meer</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>Students ship par research kar rahe hain (Meer/Nordsee).</p>
+                    <div class="answer-badge">➡️ A</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">5️⃣ Text 5 → E) Psychoterror an der Schule</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p>School bullying ka psychological effect.</p>
+                    <div class="answer-badge">➡️ E</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEN TEIL 2 (Jobs and Procedures)</div>
+        <div class="card">
+            <div class="card-header">MCQ Memory Answers</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p><strong>6️⃣ Answer = C:</strong> Waiter ka job lectures ke saath easily manage ho jata hai. (Studium + Job compatible.) <span class="answer-badge">➡️ C</span></p><br>
+                    <p><strong>7️⃣ Answer = C:</strong> Waiter ko calm rehna chahiye. Customers complain karte hain. (Don’t lose your temper.) <span class="answer-badge">➡️ C</span></p><br>
+                    <p><strong>8️⃣ Answer = C:</strong> Jan khush hai kyunki earning buri nahi hai. (Mit dem Verdienst zufrieden.) <span class="answer-badge">➡️ C</span></p><br>
+                    <p><strong>9️⃣ Answer = A:</strong> Cycling ki wajah se gym ki zarurat nahi. (Fitnessstudio ka paisa bach jata.) <span class="answer-badge">➡️ A</span></p><br>
+                    <p><strong>🔟 Answer = C:</strong> Test buyer ko ek fixed procedure follow karna hota hai: Shop mein jaana, Product dekhna, Checkout test karna. (Fixed Ablauf.) <span class="answer-badge">➡️ C</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="set16" class="set-content">
+        <div class="section-title">📖 LESEVERSTEHEN TEIL 1 - TEXT 1 (Grasshoppers)</div>
+        
+        <div class="card">
+            <div class="card-header">Text 1 - Complete Detail Line-by-Line</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p><strong>Headings Meanings:</strong><br>
+                    a) Neue Heuschreckenart in Frankreich entdeckt. (Nayi species - No)<br>
+                    b) Kleine Plagegeister können Krankheiten bringen. (Bimari - No)<br>
+                    c) Landwirte wollen Gift gegen schädliche Insekten einsetzen. (Pesticide use - ✅)<br>
+                    d) Neue Mittel gegen Mücken. (Machhar - No)</p>
+                    
+                    <div class="story-block">
+                        <strong>Line breakdown:</strong><br>
+                        • <em>Die anhaltenden außergewöhnlich hohen Temperaturen…</em> → France ke south mein bahut zyada garmi padi.<br>
+                        • <em>haben eine Tierplage ausgelöst.</em> → Insects ki badi problem ho gayi.<br>
+                        • <em>Unmengen von Heuschrecken... fressen Felder kahl.</em> → Bahut saari grasshoppers khet aur ghaas kha jaati hain.<br>
+                        • <em>Die Landwirte sind verzweifelt.</em> → Farmers bahut pareshaan hain.<br>
+                        • <em>Gift gegen Heuschrecken einsetzen</em> → Ab pesticide use karna padega taaki sirf grasshopper mare.
+                    </div>
+
+                    <div class="trigger-list">⚡ Keywords: <span>Temperaturen, Heuschrecken, Felder, Landwirte, Gift</span></div>
+                    <div class="answer-badge">Correct Heading = C</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title teil2">🎬 LESEVERSTEHEN TEIL 2 - ARTICLE 1 (Kreditkarten für Jugendliche)</div>
+        <div class="card">
+            <div class="card-header">Article Breakdown & Questions</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <div class="story-block">
+                        <strong>Main Idea:</strong> Kya teenagers ko credit card dena safe hai? Haan, par normal nahi, Prepaid credit card!<br>
+                        • <strong>Prepaid Card:</strong> Recharge jaisa. Pehle paisa daalo phir kharch karo. Debt impossible.<br>
+                        • <strong>Control:</strong> Parents ghar baithe recharge aur check kar sakte hain.<br>
+                        • <strong>Fees:</strong> Adults pay 29–39 Euro/year, Teenagers maximum 22 Euro. Adults pay more!
+                    </div>
+                    
+                    <p><strong>Q6:</strong> Banks aur Sparkassen teenagers ko prepaid card dete hain. <span class="answer-badge">✅ Answer A</span></p><br>
+                    <p><strong>Q7:</strong> Control kyun? Because expenses balance se limited hain. <span class="answer-badge">✅ Answer C</span></p><br>
+                    <p><strong>Q8:</strong> Specially teenagers aur fixed income na hone walon ke liye. <span class="answer-badge">✅ Answer B</span></p><br>
+                    <p><strong>Q9:</strong> Costs almost same as classic credit card. <span class="answer-badge">✅ Answer A</span></p><br>
+                    <p><strong>Q10:</strong> Adults pay higher fees (29-39) vs teens (max 22). <span class="answer-badge">✅ Answer A</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="set17" class="set-content">
+        <div class="section-title">📖 LESEVERSTEHEN TEIL 1 – TEXT 4</div>
+        
+        <div class="card">
+            <div class="card-header">Text 4 - Dance Vacancies Course</div>
+            <div class="card-body">
+                <div class="card-inner-content">
+                    <p><strong>Heading:</strong> a) Freie Plätze im Tanzkurs (Dance course mein seats khali hain / New students wanted)</p>
+                    
+                    <div class="story-block">
+                        <strong>Line by Line Easy Hindi:</strong><br>
+                        • <em>Tanja Kleist ist von modernem Tanz absolut begeistert.</em> → Tanja ko modern dance bahut pasand hai.<br>
+                        • <em>Seit einigen Jahren engagiert sie sich beim TSV Neustadt.</em> → Ab club mein dance sikhati hai.<br>
+                        • <em>Für ihre Hip-Hop-Tanzgruppe sucht sie neue Teilnehmerinnen...</em> → 🚨 New boys/girls dhoond rahi hai.<br>
+                        • <em>Viele haben nach dem Abitur die Gruppe verlassen.</em> → School khatam hone ke baad purane log chale gaye, isliye seats khali hain!
+                    </div>
+
+                    <div class="trigger-list">⚡ Exam Trick: <span>Jab bhi "sucht neue Teilnehmer", "Gruppe verlassen", "Hip-Hop-Tanzgruppe" dikhe → Seedha A.</span></div>
+                    <div class="answer-badge">Correct Answer = A</div>
+                    
+                    <div class="cram-sheet" style="margin-top:15px;">
+                        <strong>15-Second Cram:</strong> Tanja → Dance teacher → Old students left after Abitur → Empty seats → Looking for new Hip-Hop dancers 14+ → Public performances.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set switching logic
+        function switchSet(setId, btnElement) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.set-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show target content and activate clicked button
+            document.getElementById(setId).classList.add('active');
+            btnElement.classList.add('active');
+            
+            // Scroll smoothly to top of content area
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        // Accordion toggle logic with smooth max-height transitions
+        document.addEventListener('click', function(e) {
+            const header = e.target.closest('.card-header');
+            if (!header) return;
+            
+            const card = header.parentElement;
+            const body = card.querySelector('.card-body');
+            
+            card.classList.toggle('open');
+            
+            if (card.classList.contains('open')) {
+                body.style.maxHeight = body.scrollHeight + "px";
+            } else {
+                body.style.maxHeight = "0px";
+            }
+        });
+    </script>
+</body>
+</html>
